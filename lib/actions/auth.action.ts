@@ -22,9 +22,9 @@ export async function signUp(params:SignUpParams) {
             success:true,
             message:"account created successfully"
         }
-    }catch(e:any){
+    }catch(e:unknown){
         console.error("error creating a user",e)
-        if(e.code==="auth/email-already-exists"){
+        if(typeof e === "object" && e !== null && "code" in e && e.code === "auth/email-already-exists"){
             return{
                 success:false,
                 message:"This email is already in use"
