@@ -79,21 +79,21 @@ const AuthForm = ({type}:{type:FormType}) => {
           <h2 className="text-primary-100">Prepwise</h2>
         </div>
         <h3 className="text-center">Practice job interview with AI</h3>
-      <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
-      {!isSignIn && <FormField control={form.control} name="name" label="Name" placeholder="Your name"/>}
-      <FormField control={form.control} name="email" label="Email" placeholder="Your email" type="email"/>
-      <FormField control={form.control} name="password" label="Password" placeholder="Enter your password" type="password"/>
-        <Button  className="btn" type="submit">{isSignIn?"Sign in":"Create an Account"}</Button>
-      </form>
-    </Form>
-      <p className="text-center">
-        <Link href={isSignIn ? "/sign-up" : "/sign-in"} className="font-bold text-user-primary ml-1">
-          {!isSignIn ? "have an account already" : "no account yet"}
-        </Link>
-      </p>
-   </div>
-  </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
+            {!isSignIn && <FormField control={form.control} name="name" label="Name" placeholder="Your name"/>}
+            <FormField control={form.control} name="email" label="Email" placeholder="Your email" type="email"/>
+            <FormField control={form.control} name="password" label="Password" placeholder="Enter your password" type="password"/>
+            <Button  className="btn" type="submit">{isSignIn?"Sign in":"Create an Account"}</Button>
+          </form>
+        </Form>
+          <p className="text-center">
+          <Link href={isSignIn ? "/sign-up" : "/sign-in"} className="font-bold text-user-primary ml-1">
+            {!isSignIn ? "have an account already" : "no account yet"}
+          </Link>
+          </p>
+      </div>
+    </div>
   )
 }
 

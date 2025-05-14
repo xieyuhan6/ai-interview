@@ -15,9 +15,13 @@ export async function signUp(params:SignUpParams) {
                 message:"user already exists"
             }
         }
-        await db.collection("user").doc(uid).set({
+        await db.collection("users").doc(uid).set({
             name,email
         })
+        return{
+            success:true,
+            message:"account created successfully"
+        }
     }catch(e:any){
         console.error("error creating a user",e)
         if(e.code==="auth/email-already-exists"){
@@ -39,7 +43,7 @@ export async function signIn(params:SignInParams){
         const userRecord=await auth.getUserByEmail(email)
         if(!userRecord){
             return{
-                sucess:false,
+                success:false,
                 message:"user does not exist"
             }
         }
@@ -66,4 +70,31 @@ export async function setSessionCookie(idToken:string) {
         path:"/",
         sameSite:"lax"
     }
+}
+
+export async function getCurrentUser():Promise<User|null>{
+    const cookieStore=await cookies()
+    const sessionCookie=cookieStore.get("session")?.value
+    if(!sessionCookie)return null;
+    try{
+        const decodedClaims=await auth.verifySessionCookie(sessionCookie,true)
+        const userRecord=await db.
+        collection("users")
+        .doc(decodedClaims.uid)
+        .get()
+        if(!userRecord.exists) return null;
+
+        return{
+            ...userRecord.data(),
+            id:userRecord.id           
+        } as User;
+    }catch(e){
+        console.log(e)
+        return null
+    }
+}
+
+export async function isAuthenticated() {
+    const user=await getCurrentUser()
+    return !!user
 }
