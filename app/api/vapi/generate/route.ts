@@ -24,7 +24,6 @@ export async function POST(request:Request) {
                     ["Question 1", "Question 2", "Question 3"]
                      Thank you! <3
     `
-
         })
         const interview={
             role,type,level,techstack:techstack.split(','),questions:JSON.parse(questions),userid:userid,finalized:true,coverImage:getRandomInterviewCover(),creatAt:new Date().toISOString()
