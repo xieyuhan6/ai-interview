@@ -25,7 +25,7 @@ const page = async () => {
       </section>
       <section className='flex flex-col gap-6 mt-8'>
         <h2>Your interviews</h2>
-        <div className='interview-section'>
+        <div className='interview-section flex flex-row space-x-5'>
           {dummyInterviews.map((interview)=>(
               <InterviewCard {...interview} key={interview.id}/>
               ))}
@@ -34,7 +34,7 @@ const page = async () => {
       </section>
       <section className='flex flex-col gap-6 mt-8'>
         <h2>Take an interview</h2>
-        <div className='interview-section'>
+        <div className='interview-section flex flex-row space-x-5'>
           {dummyInterviews.map((interview)=>(
               <InterviewCard {...interview} key={interview.id}/>
           ))}

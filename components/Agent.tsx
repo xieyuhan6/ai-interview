@@ -21,7 +21,6 @@ interface savedMessage{
     content:string;
 
 }
-
 const Agent = ({userName,userId,type}:AgentProps) => {
   const router=useRouter()
   const[isSpeaking,setIsSpeaking]=useState(false)
@@ -55,18 +54,47 @@ const Agent = ({userName,userId,type}:AgentProps) => {
   },[])
   useEffect(()=>{
     if(callStatus===CallStatus.FINISHED)router.push("/")
-
   },[messages,callStatus,type,userId])
-  const handleCall=async()=>{
+const handleCall = async () => {
+  try {
     setCallStatus(CallStatus.CONNECTING);
-        await vapi.start("b33e4730-803d-4411-b950-17199c4461c4", {
-            variableValues: {
-                username: userName ?? "Guest",
-                userid: userId ?? "unknown",
-            },
-            clientMessages: [],
-            serverMessages: [],
-        })}
+
+    // 1. 调用你自己的 API 生成面试题并写入 Firebase
+    const res = await fetch("/api/vapi/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        role: "Frontend Developer",
+        level: "Junior",
+        type: type, // 来自 props
+        techstack: "React,TypeScript",
+        amount: 5,
+        userid: userId ?? "unknown",
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!data.success || !data.interviewId) {
+      throw new Error("Failed to generate interview");
+    }
+
+    // 2. 启动 Vapi 通话
+    await vapi.start("b33e4730-803d-4411-b950-17199c4461c4", {
+      variableValues: {
+        username: userName ?? "Guest",
+        userid: userId ?? "unknown",
+        interviewId: data.interviewId, // 👈 带上刚刚生成的 interviewId
+      },
+      clientMessages: [],
+      serverMessages: [],
+    });
+
+  } catch (error) {
+    console.error("Call start failed:", error);
+    setCallStatus(CallStatus.INACTIVE);
+  }
+};
     const handleDisconnect=async()=>{
     setCallStatus(CallStatus.FINISHED)
     vapi.stop()
