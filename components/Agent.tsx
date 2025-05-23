@@ -19,20 +19,27 @@ enum CallStatus{
 interface savedMessage{
     role:"user"|"system"|"assistant"
     content:string;
-
 }
 const Agent = ({userName,userId,type}:AgentProps) => {
   const router=useRouter()
   const[isSpeaking,setIsSpeaking]=useState(false)
   const[callStatus,setCallStatus]=useState<CallStatus>(CallStatus.INACTIVE)
-  const [messages,setMessages]=useState<savedMessage[]>([])
+  const[messages,setMessages]=useState<savedMessage[]>([])
   useEffect(()=>{
     const onCallStart=()=>setCallStatus(CallStatus.ACTIVE)
     const onCallEnd=()=>setCallStatus(CallStatus.FINISHED)
-    const onMessage=(message:Message)=>{
+    const onMessage=async(message:Message)=>{
+        console.log("Received message:", message);
         if (message.type==="transcript"&&message.transcriptType==="final"){
             const newMessage={role:message.role,content:message.transcript}
             setMessages((prev)=>[...prev,newMessage])
+            await fetch("/api/vapi/transcript",{
+                method:"POST",
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify({ message: newMessage })
+            })
         }}
     const onSpeechStart=()=>setIsSpeaking(true)
     const onSpeechEnd=()=>setIsSpeaking(false)
@@ -52,6 +59,14 @@ const Agent = ({userName,userId,type}:AgentProps) => {
     vapi.off("error",onError)
     }
   },[])
+    useEffect(()=>{
+        const fecthMessage=async()=>{
+            const res=await fetch('/api/vapi/transcript')
+            const data=await res.json()
+            setMessages(data.message)
+        }
+        fecthMessage()
+    },[])
   useEffect(()=>{
     if(callStatus===CallStatus.FINISHED)router.push("/")
   },[messages,callStatus,type,userId])
@@ -91,7 +106,7 @@ const Agent = ({userName,userId,type}:AgentProps) => {
         {messages.length>0&&(
             <div className='transcript-border'>
                 <div className='transcript'>
-                    <p key={lastestMessage} className={clsx("transition-opacity duration-500 opacity-0","animate-fadeIn-opacity-100")}>{lastestMessage}</p>
+                    <p key={messages.length - 1} className={clsx("transition-opacity duration-500  opacity-0","animate-fadeIn-opacity-100")}>{lastestMessage}</p>
                 </div>
             </div>
         )}
