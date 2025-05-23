@@ -85,6 +85,7 @@ const AuthForm = ({type}:{type:FormType}) => {
             <FormField control={form.control} name="email" label="Email" placeholder="Your email" type="email"/>
             <FormField control={form.control} name="password" label="Password" placeholder="Enter your password" type="password"/>
             <Button  className="btn" type="submit">{isSignIn?"Sign in":"Create an Account"}</Button>
+            <Button onClick={() => router.push('/')}>LogIn without account</Button>
           </form>
         </Form>
           <p className="text-center">

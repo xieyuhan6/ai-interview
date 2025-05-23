@@ -84,7 +84,7 @@ const Agent = ({userName,userId,type}:AgentProps) => {
     setCallStatus(CallStatus.FINISHED)
     vapi.stop()
   }
-   const lastestMessage=messages[messages.length-1]?.content
+   const latestMessage = messages?.[messages.length - 1]?.content ?? ""
    const isCallInactiveOrFinished=callStatus===CallStatus.INACTIVE||callStatus===CallStatus.FINISHED
   return (
     <>
@@ -103,13 +103,11 @@ const Agent = ({userName,userId,type}:AgentProps) => {
                 </div>
             </div>
         </div>
-        {messages.length>0&&(
             <div className='transcript-border'>
                 <div className='transcript'>
-                    <p key={messages.length - 1} className={clsx("transition-opacity duration-500  opacity-0","animate-fadeIn-opacity-100")}>{lastestMessage}</p>
+                    <p key={latestMessage} className={clsx("transition-opacity duration-500  opacity-0","animate-fadeIn-opacity-100")}>{latestMessage}</p>
                 </div>
             </div>
-        )}
         <div className='w-full flex justify-center'>
             {callStatus!=="ACTIVE"?(
                 <button className='relative btn-call' onClick={handleCall}>
