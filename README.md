@@ -31,8 +31,3 @@ Built with **Next.js**, **Tailwind CSS**, and **Firebase**, enhanced by **Vapidk
 - 💻 **Responsive Design**  
   Consistent look-and-feel using `shadcn/ui` components & Tailwind CSS
 
----
-
-## 🗂️ **Project Structure**
-*(for developers)*
-
