@@ -1,16 +1,38 @@
-AI-Interview
+# 🎙️ **AI-Interview**
 
-An intelligent interview frontend built with Next.js and TailwindCSS, featuring a backend powered by Next.js API routes, Firebase for authentication and data storage, and Vapidk for AI-powered speech-to-text and interaction.
+*An intelligent AI-powered interview platform for real-time voice-based interviews.*
 
-Tech Stack:
-Frontend: Next.js, Tailwind CSS, shadcn UI component library
-Backend: Next.js API routes
-Authentication & Database: Firebase (Authentication, Firestore, etc.)
-AI Integration: Vapidk (for speech transcription and AI interactions)
+Built with **Next.js**, **Tailwind CSS**, and **Firebase**, enhanced by **Vapidk** for AI-powered speech-to-text and interaction.
 
-Features
-User registration and login using Firebase Authentication
-Real-time AI-powered voice interview
-Auto-generated interview questions and management
-Responsive UI with consistent styling using shadcn components
+---
+
+## 🚀 **Tech Stack**
+
+| Layer            | Technology                                                                 |
+|------------------|----------------------------------------------------------------------------|
+| 🧑‍💻 **Frontend**   | `Next.js`, `Tailwind CSS`, `shadcn/ui`                                      |
+| 🔧 **Backend**     | `Next.js API Routes`                                                       |
+| 🔐 **Auth & DB**   | `Firebase Authentication`, `Cloud Firestore`                               |
+| 🧠 **AI Engine**   | `Vapidk` — real-time speech transcription & AI interaction                 |
+
+---
+
+## ✨ **Features**
+
+- 🔐 **User Authentication**  
+  Sign up & log in via Firebase Authentication
+
+- 🎤 **Real-time AI Voice Interview**  
+  Talk to the AI with live voice transcription and responses
+
+- 🧠 **Auto-generated Interview Questions**  
+  Smart question flow with real-time response evaluation
+
+- 💻 **Responsive Design**  
+  Consistent look-and-feel using `shadcn/ui` components & Tailwind CSS
+
+---
+
+## 🗂️ **Project Structure**
+*(for developers)*
 
