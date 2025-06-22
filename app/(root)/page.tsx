@@ -4,8 +4,8 @@ import { dummyInterviews } from '@/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { getCurrentUser } from '@/lib/actions/auth.action'
-import { redirect } from 'next/navigation'
+// import { getCurrentUser } from '@/lib/actions/auth.action'
+// import { redirect } from 'next/navigation'
 
 const page = async () => {
   // const user = await getCurrentUser();
