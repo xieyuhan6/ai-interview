@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/client";
 import { signIn, signUp } from "@/lib/actions/auth.action";
+import DashboardButton from "@/app/(root)/componenrs/dashboradbutton";
  
 const authFormSchema=(type:FormType)=>{
   return z.object({
@@ -32,6 +33,7 @@ const AuthForm = ({type}:{type:FormType}) => {
       password: "",
     },
   })
+
     async function onSubmit(values: z.infer<typeof formSchema>) {
       try{
         if(type=="sign-up"){
@@ -85,9 +87,16 @@ const AuthForm = ({type}:{type:FormType}) => {
             <FormField control={form.control} name="email" label="Email" placeholder="Your email" type="email"/>
             <FormField control={form.control} name="password" label="Password" placeholder="Enter your password" type="password"/>
             <Button  className="btn" type="submit">{isSignIn?"Sign in":"Create an Account"}</Button>
-            <Button onClick={() => router.push('/')}>LogIn without account</Button>
           </form>
         </Form>
+    <Button
+      onClick={() => {
+        console.log("按钮被点击了");
+        router.push("/");
+      }}
+    >
+      loginwithoutpassword
+    </Button>
           <p className="text-center">
           <Link href={isSignIn ? "/sign-up" : "/sign-in"} className="font-bold text-user-primary ml-1">
             {!isSignIn ? "have an account already" : "no account yet"}

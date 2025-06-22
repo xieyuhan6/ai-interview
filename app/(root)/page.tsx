@@ -8,9 +8,9 @@ import { getCurrentUser } from '@/lib/actions/auth.action'
 import { redirect } from 'next/navigation'
 
 const page = async () => {
-  const user = await getCurrentUser();
-      if (!user) {
-        redirect('/sign-in')}
+  // const user = await getCurrentUser();
+  //     if (!user) {
+  //       redirect('/sign-in')}
   return (
     <>
       <section className="card-cta">
