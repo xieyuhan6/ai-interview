@@ -7,7 +7,7 @@ const LogoutButton = () => {
   const router = useRouter()
 
   const handleLogout = () => {
-    router.push('/sign-in') 
+    router.replace('/sign-in') 
   }
 
   return <Button onClick={handleLogout}>Log out</Button>

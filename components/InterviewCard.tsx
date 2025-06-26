@@ -28,13 +28,13 @@ const InterviewCard = ({interviewId,role,type,techstack,createdAt}:InterviewCard
                     <p>{feedback?.totalScore||"---"}/100</p>
                 </div>
             </div>
-            <p className='line-clamp-2 mt-5'>{feedback?.finalAssessment||"You haven't taken the interview yet"}</p>
+            <p className='line-clamp-2 mt-5'>{feedback?.finalAssessment||"You haven't taken this interview yet"}</p>
         </div>
         <div className='flex flex-row justify-between'>
             <DisplayTechIcons techStack={techstack}/>
             <Button className='btn-primary'>
                 <Link href={feedback?`/interview/${interviewId}/feedback`:`/interview/${interviewId}`}>
-                {feedback? "check feeback":"view your interview"}
+                {feedback? "check feeback":"take this interview"}
                 </Link>
             </Button>   
         </div>
