@@ -1,0 +1,14 @@
+{
+  "name": "interview-helper-livekit-agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/main.ts dev",
+    "start": "tsx src/main.ts start"
+  },
+  "dependencies": {
+    "@livekit/agents": "^1.9.5",
+    "dotenv": "^16.4.7",
+    "tsx": "^4.19.3"
+  }
+}
